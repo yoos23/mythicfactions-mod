@@ -1,34 +1,25 @@
 plugins {
-    id 'fabric-loom' version '1.7.4'   // stable pour MC 1.21.1
+    id 'fabric-loom' version '1.7.4'
     id 'maven-publish'
 }
 
-version = '0.1.0'
-group = 'com.mythicfactions'
-
 repositories {
-    maven { url "https://maven.fabricmc.net/" }
-    maven { url "https://maven.minecraftforge.net/" }
-    maven { url "https://maven.terraformersmc.com/releases/" }
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" } // <-- important
+    maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://maven.shedaniel.me/" }
+    maven { url = "https://maven.terraformersmc.com/releases/" }
+    maven { url = "https://maven.isxander.dev/releases" }
+    maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
     mavenCentral()
 }
 
-
-
-
 dependencies {
     minecraft "com.mojang:minecraft:1.21.1"
-    mappings loom.officialMojangMappings()
-
-    modImplementation "net.fabricmc:fabric-loader:0.15.11"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.102.0+1.21.1"
-
-    // GeckoLib (dépôt Cloudsmith)
-    modImplementation "software.bernie.geckolib:geckolib-fabric-1.21:4.5.6"
-
+    mappings "net.fabricmc:yarn:1.21.1+build.10:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.16.7"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.105.0+1.21.1"
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.5.6"
 }
+
 
 
 /* --- Supprimé : plus de splitEnvironmentSourceSets en Loom 1.7+ ---
