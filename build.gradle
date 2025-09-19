@@ -1,38 +1,74 @@
 plugins {
-    id 'fabric-loom' version '1.7.4'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 }
 
+group = 'com.tonpseudo.mythicfactions'
+version = '1.0.0'
+
+base {
+    archivesName = 'mythicfactions'
+}
+
 repositories {
-    maven { url = "https://maven.fabricmc.net/" }
-    maven { url = "https://maven.shedaniel.me/" }
-    maven { url = "https://maven.terraformersmc.com/releases/" }
-    maven { url = "https://maven.isxander.dev/releases" }
-    maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
     mavenCentral()
+    maven { url 'https://maven.fabricmc.net/' }
+    maven { url 'https://maven.shedaniel.me/' }       // Pour Cloth Config / Architectury (si besoin)
+    maven { url 'https://maven.terraformersmc.com/releases/' } // Mod Menu / Terraformers
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' } // GeckoLib
 }
 
 dependencies {
+    // Minecraft
     minecraft "com.mojang:minecraft:1.21.1"
-    mappings "net.fabricmc:yarn:1.21.1+build.10:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.16.7"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.105.0+1.21.1"
-    modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.5.6"
+
+    // Yarn mappings (correct build)
+    mappings "net.fabricmc:yarn:1.21.1+build.2:v2"
+
+    // Fabric loader
+    modImplementation "net.fabricmc:fabric-loader:0.16.9"
+
+    // Fabric API (optionnel mais souvent nécessaire)
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.102.0+1.21.1"
+
+    // GeckoLib
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.6.5"
+
+    // JUnit (tests)
+    testImplementation "junit:junit:4.13.2"
 }
 
-
-
-/* --- Supprimé : plus de splitEnvironmentSourceSets en Loom 1.7+ ---
 loom {
-    // splitEnvironmentSourceSets = true
-}
-------------------------------------------------------------------- */
+    splitEnvironmentSourceSets()
 
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    mods {
+        mythicfactions {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
     withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${base.archivesName.get()}" }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
