@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "mythicfactions",
+  "version": "0.1.0",
+  "name": "Mythic Factions Armors",
+  "description": "Custom Baku helmet with 3D horns (test).",
+  "authors": ["You"],
+  "entrypoints": {
+    "main": ["com.mythicfactions.MythicFactionsMod"],
+    "client": ["com.mythicfactions.MythicFactionsClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric": "*",
+    "minecraft": "1.21.1",
+    "geckolib": ">=4.5.0"
+  },
+  "license": "MIT"
+}
