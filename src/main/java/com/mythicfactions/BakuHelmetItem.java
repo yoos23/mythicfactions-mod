@@ -1,11 +1,12 @@
-package com.mythicfactions;
-
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;
-import software.bernie.geckolib.item.GeoArmorItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import software.bernie.geckolib.animatable.GeoArmorItem;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 
-public class BakuHelmetItem extends GeoArmorItem {
+public class BakuHelmetItem extends GeoArmorItem implements GeoAnimatable {
     public BakuHelmetItem() {
-        super(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Settings());
+        super(ArmorMaterials.NETHERITE, Type.HELMET, new Item.Settings());
     }
 }
